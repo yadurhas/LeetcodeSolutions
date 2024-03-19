@@ -38,29 +38,6 @@ var leastInterval = function(tasks, n) {
             ind = (ind + 1) % (arrSize - 1);
         }
     }
-    //console.log(arr);
-    /*if (freqArr[1][1] == freqArr[0][1]) {
-        let ind = 0;
-        for (let i = 0; i < freqArr.length; i++) {
-            for (let j = 0; j < freqArr[i][1]; j++) {
-                arr[ind].push(freqArr[i][0]);
-                ind = (ind + 1) % arrSize;
-            }
-        }
-    }
-    else {
-        let ind = 0;
-        for (let j = 0; j < freqArr[0][1]; j++) {
-            arr[ind].push(freqArr[0][0]);
-            ind = (ind + 1) % arrSize;
-        }
-        for (let i = 1; i < freqArr.length; i++) {
-            for (let j = 0; j < freqArr[i][1]; j++) {
-                arr[ind].push(freqArr[i][0]);
-                ind = (ind + 1) % (arrSize - 1);
-            }
-        }
-    }*/
     let minIntervals = 0;
     for (let i = 0; i < arrSize - 1; i++) {
         minIntervals += (arr[i].length < (n + 1) ? (n + 1) : arr[i].length);
