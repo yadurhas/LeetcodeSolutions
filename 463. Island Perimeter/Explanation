@@ -1,1 +1,5 @@
+Iterate over the matrix,
+
+When you find land, count the neighbours that are in contact with water 
+(assume that the cell at that particular edge is in contact with water, if no neighbor exists at the edge) 
 
