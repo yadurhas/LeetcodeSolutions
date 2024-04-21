@@ -1,1 +1,9 @@
+if source == destination, return true, else
 
+Create and populate a 2d array adjList based on the edges array. (could have used a JS map)
+
+Then create a queue and place source as the first element.
+
+Do BFS using the queue until you find the destination, then return true.
+
+If the destination is not found, return false;
