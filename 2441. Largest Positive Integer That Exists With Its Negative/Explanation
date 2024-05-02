@@ -1,0 +1,96 @@
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+For every positive integer `k` in the array `nums`, we need to check whether `-k` exists in the array. We need to calculate the maximum `k` for which `-k` exists.
+
+We need to store every element of `nums` in a `Set` or `Map`. Then iterate through `nums` and find the maximum positive number satisfying the given condition.
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+Traverse the array `nums` once and store every element in a `Set`.
+
+Keep track of the maximum positive element using a variable `maxK`. Intialise `maxK` to `-1`, which is the return value incase none of the positive integers in the array `nums` meet the required condition.
+
+Iterate over the array `nums` . If the element is a positive number `k`, check whether `-1 * k` exists in the `Set`. If `k` satisfies the condition and `k > maxK`, then update `maxK = k`.
+
+In the above step, we can see that `maxK` would be first updated when we first encounter a positive number `k` which satisfies the condition. From then on we need not check the condition for every positive number `k`. We just need to check the condition for every `k` which is greater than `maxK` as we need the maximum positive integer `k` for this problem. (`maxK` will always be positive or `-1` as `nums` doesn't contain `0`. This step is optional, but may be marginally better for large outputs as we do not access the Set for every encounter of a positive number.). 
+
+return `maxK`. 
+
+# Complexity
+- Time complexity: O(n)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(n)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+# Code
+```javascript []
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMaxK = function(nums) {
+    let set1 = new Set();
+    for (let num of nums) {
+        set1.add(num);
+    }
+    let maxK = -1;
+    for (let value of set1.values()) {
+        if (value > maxK) {
+            if (set1.has(-1 * value)) {
+                maxK = value;
+            }
+        }
+    }
+    return maxK;
+};
+```
+```C []
+//storing all -1 * negative elements in the hash table.
+
+//Initialising every element in hashtable to 0 as nums cannot contain 0
+
+void insertToHash(int *hash, int hashSize, int val) {
+    val = -1 * val;
+    int key = val % hashSize;
+    while (hash[key] != 0) {
+        if (hash[key] == val) {
+            return;
+        }
+        key = (key + 1) % hashSize;
+    }
+    hash[key] = val;
+}
+
+int getIndex(int *hash, int hashSize, int val) {
+    int key = val % hashSize;
+    while (hash[key] != 0) {
+        if (hash[key] == val) {
+            return key;
+        }
+        key = (key + 1) % hashSize;
+    }
+    return -1;
+}
+
+int findMaxK(int* nums, int numsSize) {
+    int *hash, hashSize = numsSize;
+    hash = calloc(hashSize , sizeof(int));
+    int maxK = -1, t;
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] < 0) {
+            insertToHash(hash, hashSize, nums[i]);
+        }
+    }
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] > maxK) {
+            t = getIndex(hash, hashSize, nums[i]);
+            if (t != -1) {
+                maxK = nums[i];
+            }
+        }
+    }
+    return maxK;
+}
+```
